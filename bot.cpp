@@ -56,8 +56,12 @@ bool Bot :: takeTurn(Map* mapPlayer)
         CoordinatsToShoot* cordToShot;
 
         do{
+
+            if(position->empty())
+            {
+                break;
+            }
             cordToShot = position->front();
-            position->clear();
 
             cout <<"lewo: " <<oneLeftPoint->getShiftX() <<" " << oneLeftPoint->getShiftY() << endl;
             cout <<"prawo "<< oneRightPoint->getShiftX()<< " " << oneRightPoint->getShiftY() << endl;
@@ -74,11 +78,11 @@ bool Bot :: takeTurn(Map* mapPlayer)
             x = this->hitX + cordToShot->getShiftX();
             y = this->hitY + cordToShot->getShiftY();
 
-        }  while(mapPlayer->getPiece(x,y) == nullptr || (mapPlayer->getPiece(x,y)->getState() == SHIP || mapPlayer->getPiece(x,y)->getState() == BLANK)  || !position->empty());
+        }  while(mapPlayer->getPiece(x,y) == nullptr || (mapPlayer->getPiece(x,y)->getState() == SHIP || mapPlayer->getPiece(x,y)->getState() == BLANK));
 
         if(position->empty())
         {
-            cout<< "WARNING - POSITION EMPTY" << flush;
+            cout<< "WARNING - POSITION EMPTY" << endl <<flush;
         }
 
         if(mapPlayer->getPiece(x,y)->getState() == State::SHIP)
@@ -98,27 +102,51 @@ bool Bot :: takeTurn(Map* mapPlayer)
                 this->hitY = y;
                 if(cordToShot == oneLeftPoint)
                 {
+                    cout << "HIT ONE LEFT"<< endl;
+                    cout << "POSITION SIZE: " << position->size() << endl;
                     position->clear();  // XXXXXXX
                     position->push_back(oneLeftPoint);
                     position->push_back(twoRightPoint);
+                    cout << "POSITION[0] = " << position->front()->getShiftX() <<", " << position->front()->getShiftY() << endl;
+                    cout << "POSITION[1] = " << position->front()->getShiftX() <<", " << position->front()->getShiftY() << endl;
                 }
                 else if(cordToShot == oneRightPoint )
                 {
+                    cout << "HIT ONE RIGHT"<< endl;
+                    cout << "POSITION SIZE: " << position->size() << endl;
                     position->clear();// XXXXXXX
                     position->push_back(oneRightPoint);
                     position->push_back(twoLeftPoint);
+                    cout << "POSITION[0] = " << position->front()->getShiftX() <<", " << position->front()->getShiftY() << endl;
+                    cout << "POSITION[1] = " << position->front()->getShiftX() <<", " << position->front()->getShiftY() << endl;
+
                 }
                 else if(cordToShot == oneDownPoint)
                 {
+                    cout << "HIT ONE DOWN"<< endl;
+                    cout << "POSITION SIZE: " << position->size() << endl;
                     position->clear();// XXXXXXX
                     position->push_back(oneDownPoint);
                     position->push_back(twoUpPoint);
+                    cout << "POSITION SIZE: " << position->size() << endl; // XX logowanie, dodaj takie w każdym ifie
+                    cout << "POSITION[0] = " << position->front()->getShiftX() <<", " << position->front()->getShiftY() << endl;
+                    cout << "POSITION[1] = " << position->front()->getShiftX() <<", " << position->front()->getShiftY() << endl;
+                }
+                else if(cordToShot == oneUpPoint)
+                {
+                    cout << "HIT ONE UP"<< endl;
+                    cout << "POSITION SIZE: " << position->size() << endl;
+                    position->clear();// XXXXXXX
+                    position->push_back(oneUpPoint);
+                    position->push_back(twoDownPoint);
+                    cout << "POSITION SIZE: " << position->size() << endl; // XX logowanie, dodaj takie w każdym ifie
+                    cout << "POSITION[0] = " << position->front()->getShiftX() <<", " << position->front()->getShiftY() << endl;
+                    cout << "POSITION[1] = " << position->front()->getShiftX() <<", " << position->front()->getShiftY() << endl;
                 }
                 else
                 {
-                    position->clear();// XXXXXXX
-                    position->push_back(oneUpPoint);
-                   // position->push_back(twoDown);
+                    cout << "NIGDY NIE POWINNO SIE ZDARZYC" << endl;
+                                       cout << "CORD TO SHOOT = " << cordToShot->getShiftX() <<", " << cordToShot->getShiftY() << endl;
                 }
 
             }

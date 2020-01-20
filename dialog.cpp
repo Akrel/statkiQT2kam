@@ -47,7 +47,7 @@ Dialog::Dialog(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog)
         }
     }
 
-
+    this->bot = new Bot();
     this->playerShips = createShips(playersMap);
     this->botShips = createShips(botsMap);
 
@@ -131,19 +131,19 @@ list<Ship*>*  createShips(Map* map)
 
 
 
-    for(int i = 0; i < 2;i++){
+    for(int i = 0; i < 1;i++){
 
         listShip->push_back(Ship::createThreeMast(map));
     }
 
-    for(int i = 0; i < 3;i++){
-        listShip->push_back(Ship::createTwoMast(map));
+//  for(int i = 0; i < 3;i++){
+//        listShip->push_back(Ship::createTwoMast(map));
 
 
-    }
-    for(int i = 0; i < 4;i++){
-        listShip->push_back(Ship::createOneMast(map));
-    }
+//    }
+//    for(int i = 0; i < 4;i++){
+//        listShip->push_back(Ship::createOneMast(map));
+//    }
     return listShip;
 }
 

@@ -1,18 +1,16 @@
 #ifndef PIECETOSHOOT_H
 #define PIECETOSHOOT_H
-class CoordinatsToShoot;
+
 class CoordinatsToShoot
 {
 public:
 
-
     int getShiftX();
     int getShiftY();
- CoordinatsToShoot(int x, int y);
+    CoordinatsToShoot(int x, int y);
 
 private:
 
-   // CoordinatsToShoot(int x, int y);
 
     int shiftX;
     int shiftY;

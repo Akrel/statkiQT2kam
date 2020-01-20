@@ -45,7 +45,7 @@ private:
     Map* playersMap;
     Map* botsMap;
 
-    Bot* bot = new Bot();
+    Bot* bot;
     Player* humanPlayer;
 
     list<Ship*>* playerShips;
