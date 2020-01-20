@@ -41,8 +41,8 @@ Map::Map(int x0, int y0,  bool shouldPaintShipStatus, int size, int pieceSize)
         for (int j = 0; j < size; j++) {
             cout << "x " << x <<", y " << y << endl;//"x " <<"x " <<
             Piece *piece = new Piece(x, y, pieceSize,shouldPaintShipStatus);
-            piece->setMapPositionY(j);
-            piece->setMapPositionX(i);
+            piece->setMapPositionY(i);
+            piece->setMapPositionX(j);
             row->push_back(piece);
             x = x + pieceSize;
         }
@@ -72,16 +72,20 @@ void Map::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidg
 }
 
 
-Piece *Map::getPiece(int row, int col){
+Piece *Map::getPiece(int x, int y){
 
-    if(row > 9 || row < 0 || col > 9 || col < 0 )
+
+    cout <<"row: " << x << " col: " << y << flush << endl;
+    if(x > 9 || x < 0 || y > 9 || y < 0 )
     {
         return nullptr;
 
     }
     else
     {
-        return this->pieces[row][col];
+        Piece* piece = pieces[y][x];
+        cout <<"piece X: " <<piece->getMapPositionX()<<" Y: "<< piece->getMapPositionY() << flush << endl;
+        return piece;
     }
 
 }

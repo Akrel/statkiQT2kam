@@ -51,8 +51,8 @@ Dialog::Dialog(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog)
     this->playerShips = createShips(playersMap);
     this->botShips = createShips(botsMap);
 
-     scene->addItem(playersMap);
-     scene->addItem(botsMap);
+    scene->addItem(playersMap);
+    scene->addItem(botsMap);
 
     // maps and ships ready
     update();
@@ -95,12 +95,12 @@ void Dialog::playTheGame(GameProgressEvent* event)
         do
         {
 
-         status = bot->takeTurn(playersMap);
-         QThread::msleep(100);
-         if (checkIsEnd(playerShips)) {
-             std::cout << "END, BOT WON" << flush;
-             // display prompt & exit application ?
-         }
+            status = bot->takeTurn(playersMap);
+            QThread::msleep(100);
+            if (checkIsEnd(playerShips)) {
+                std::cout << "END, BOT WON" << flush;
+                // display prompt & exit application ?
+            }
             playersMap->update();
         }while(status);
         currentGamePhase = BOT_TURN;
@@ -136,14 +136,14 @@ list<Ship*>*  createShips(Map* map)
         listShip->push_back(Ship::createThreeMast(map));
     }
 
-//  for(int i = 0; i < 3;i++){
-//        listShip->push_back(Ship::createTwoMast(map));
+    for(int i = 0; i < 3;i++){
+        listShip->push_back(Ship::createTwoMast(map));
 
 
-//    }
-//    for(int i = 0; i < 4;i++){
-//        listShip->push_back(Ship::createOneMast(map));
-//    }
+    }
+    for(int i = 0; i < 4;i++){
+        listShip->push_back(Ship::createOneMast(map));
+    }
     return listShip;
 }
 

@@ -74,7 +74,7 @@ public:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
-    Piece* getPiece(int row, int col);
+    Piece* getPiece(int x, int y);
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;

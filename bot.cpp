@@ -63,16 +63,8 @@ bool Bot :: takeTurn(Map* mapPlayer)
             }
             cordToShot = position->front();
 
-            cout <<"lewo: " <<oneLeftPoint->getShiftX() <<" " << oneLeftPoint->getShiftY() << endl;
-            cout <<"prawo "<< oneRightPoint->getShiftX()<< " " << oneRightPoint->getShiftY() << endl;
-            cout <<"gora " << oneUpPoint->getShiftX()<< " " << oneUpPoint->getShiftY() << endl;
-            cout <<"dol "<< oneDownPoint->getShiftX()<< " " << oneDownPoint->getShiftY() << endl;
+            cout <<"aktualny strzal: " <<cordToShot->getShiftX() <<" " << cordToShot->getShiftY() << endl;
 
-
-            cout <<"2 lewo: " <<twoLeftPoint->getShiftX()<< " " << twoLeftPoint->getShiftY() << endl;
-            cout <<"2 prawo "<< twoRightPoint->getShiftX()<< " " << twoRightPoint->getShiftY() << endl;
-            cout <<"2 gora " << twoUpPoint->getShiftX()<< " " << twoUpPoint->getShiftY() << endl;
-            cout <<"2 dol "<< twoDownPoint->getShiftX()<< " " << twoDownPoint->getShiftY() << endl;
             position->pop_front();
 
             x = this->hitX + cordToShot->getShiftX();
