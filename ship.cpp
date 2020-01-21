@@ -6,10 +6,10 @@ using namespace std;
 
 void printShipState(Ship* ship) {
 
-   cout << "SHIP SIZE = " <<ship->getListShip()->size() << endl << fflush ;
-   for(list<Piece*>::iterator it = ship->getListShip()->begin(); it != ship->getListShip()->end(); it++) {
+    cout << "SHIP SIZE = " <<ship->getListShip()->size() << endl << fflush ;
+    for(list<Piece*>::iterator it = ship->getListShip()->begin(); it != ship->getListShip()->end(); it++) {
         cout << "     PIECE: " << (*it)->getMapPositionX() << ", " << (*it)->getMapPositionY() << ", state = " << (*it)->getState() << endl << fflush; // chodzi o mapPositionX i mapPositionY
-   }
+    }
 
 }
 
@@ -21,6 +21,12 @@ Ship::Ship(list<Piece*>*listOfpiece)
 
     }
     this->pieces = listOfpiece;
+
+}
+
+Ship::~Ship()
+{
+       delete pieces;
 
 };
 
@@ -88,12 +94,12 @@ void Ship::setIsSunk()
 
 bool Ship :: checkIfCanBeShip(Map* map, int x, int y) {
     Piece* piece = map->getPiece(x, y);
-    //  cout <<"["<< x << " " << y <<"] ";
-    if (piece == nullptr) { // NULL - jestesmy poza mapa, nie moze byc tam statku
+
+    if (piece == nullptr) {
         return false;
-    } else if (piece->getState() != BLANK) { // juz tutaj jest jakis statek
+    } else if (piece->getState() != BLANK) {
         return false;
-    } else { // sprawdzamy sasiadow
+    } else {
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
                 Piece* checkedPiece = map->getPiece(x+i, y+j);
@@ -191,10 +197,9 @@ list<Piece*>* Ship::createThreeMastHorizontal (Map* Obiekt, int x, int y)
 
     int start = -1;
     int numberOfConsecutivePieces = 0;
-    for (int i = 0; i < 5; i++) {   // sprawdzamy, czy w tablicy mamy 3 'true' pod rząd (np, [false, true, true, true, false] albo [true, true, true, false, true] albo [true, false, true, true, true] albo cokolwiek innego)
-        // iterujemy tylko dla wartosci 0, 1, 2 bo tylko te indeksy mogą być początkiem naszego statku (czyli sprawdzamy statki zaczynajace sie od lewej strony)
+    for (int i = 0; i < 5; i++) {
 
-        if (canBeShip[i] == true) {   // na pozycji i jest puste pole - wiec albo zaczyna sie w tym miejscu statek, albo jest to kolejne pole statku
+        if (canBeShip[i] == true) {
             if (start == -1) {
                 start = i;
 
@@ -203,7 +208,7 @@ list<Piece*>* Ship::createThreeMastHorizontal (Map* Obiekt, int x, int y)
 
                 numberOfConsecutivePieces++;
             }
-        } else {   // na pozycji i mamy zajete pole, więc cokolwiek do tej pory znaleźliśmy nie ma już znaczenia - resetujemy się
+        } else {
             start = -1;
             numberOfConsecutivePieces = 0;
 
@@ -314,10 +319,8 @@ list<Piece*>* Ship::createTwoMastHorizontal (Map* Obiekt, int x, int y)
 
     int start = -1;
     int numberOfConsecutivePieces = 0;
-    for (int i = 0; i < 3; i++) {   // sprawdzamy, czy w tablicy mamy 3 'true' pod rząd (np, [false, true, true, true, false] albo [true, true, true, false, true] albo [true, false, true, true, true] albo cokolwiek innego)
-        // iterujemy tylko dla wartosci 0, 1, 2 bo tylko te indeksy mogą być początkiem naszego statku (czyli sprawdzamy statki zaczynajace sie od lewej strony)
-
-        if (canBeShip[i] == true) {   // na pozycji i jest puste pole - wiec albo zaczyna sie w tym miejscu statek, albo jest to kolejne pole statku
+    for (int i = 0; i < 3; i++) {
+        if (canBeShip[i] == true) {
             if (start == -1) {
                 start = i;
 
@@ -326,7 +329,7 @@ list<Piece*>* Ship::createTwoMastHorizontal (Map* Obiekt, int x, int y)
 
                 numberOfConsecutivePieces++;
             }
-        } else {   // na pozycji i mamy zajete pole, więc cokolwiek do tej pory znaleźliśmy nie ma już znaczenia - resetujemy się
+        } else {
             start = -1;
             numberOfConsecutivePieces = 0;
 
@@ -521,10 +524,6 @@ Ship* Ship :: createTwoMast(Map* Obiekt)
     return  nullptr;
 
 
-    /*
-    list<Piece*>* lista = createThreeMastVertical(Obiekt,x,y);
-    Ship* ship = new Ship(*lista);
-            return ship;
-*/
+
 }
 

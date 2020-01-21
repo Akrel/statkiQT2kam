@@ -29,7 +29,7 @@ bool Bot :: takeTurn(Map* mapPlayer)
             if(mapPlayer->getPiece(x,y)->getShip()->isSunk() == true)
             {
                 mapPlayer->getPiece(x,y)->getShip()->setIsSunk();
-                //mapPlayer->getPiece(x,y)->getShip()->setNeighborsMiss(mapPlayer);
+                mapPlayer->getPiece(x,y)->getShip()->setNeighborsMiss(mapPlayer);
 
             }
             else
@@ -70,7 +70,8 @@ bool Bot :: takeTurn(Map* mapPlayer)
             x = this->hitX + cordToShot->getShiftX();
             y = this->hitY + cordToShot->getShiftY();
 
-        }  while(mapPlayer->getPiece(x,y) == nullptr || (mapPlayer->getPiece(x,y)->getState() == SHIP || mapPlayer->getPiece(x,y)->getState() == BLANK));
+
+        }  while(mapPlayer->getPiece(x,y) == nullptr || (mapPlayer->getPiece(x,y)->getState() != SHIP && mapPlayer->getPiece(x,y)->getState() != BLANK));
 
         if(position->empty())
         {
@@ -79,19 +80,21 @@ bool Bot :: takeTurn(Map* mapPlayer)
 
         if(mapPlayer->getPiece(x,y)->getState() == State::SHIP)
         {
+            cout<< "\ntrafilem statek"<< endl <<flush;
             mapPlayer->getPiece(x,y)->setState(State::HIT);
             if(mapPlayer->getPiece(x,y)->getShip()->isSunk() == true)
             {
                 mapPlayer->getPiece(x,y)->getShip()->setIsSunk();
-                //mapPlayer->getPiece(x,y)->getShip()->setNeighborsMiss(mapPlayer);
+                   position->clear();
+                mapPlayer->getPiece(x,y)->getShip()->setNeighborsMiss(mapPlayer);
 
             }
 
             else
             {
-
                 this->hitX = x;
                 this->hitY = y;
+
                 if(cordToShot == oneLeftPoint)
                 {
                     cout << "HIT ONE LEFT"<< endl;
@@ -138,7 +141,7 @@ bool Bot :: takeTurn(Map* mapPlayer)
                 else
                 {
                     cout << "NIGDY NIE POWINNO SIE ZDARZYC" << endl;
-                                       cout << "CORD TO SHOOT = " << cordToShot->getShiftX() <<", " << cordToShot->getShiftY() << endl;
+                    cout << "CORD TO SHOOT = " << cordToShot->getShiftX() <<", " << cordToShot->getShiftY() << endl;
                 }
 
             }
@@ -147,8 +150,11 @@ bool Bot :: takeTurn(Map* mapPlayer)
 
         else
         {
-            mapPlayer->getPiece(x,y)->setState(State::MISS);
-            return false;
+
+           cout<<"\n ustawiam miss"<< endl <<flush;
+                mapPlayer->getPiece(x,y)->setState(State::MISS);
+                return false;
+
         }
 
 

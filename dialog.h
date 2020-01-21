@@ -44,7 +44,7 @@ private:
 
     Map* playersMap;
     Map* botsMap;
-
+    QString liczbaStatkow;
     Bot* bot;
     Player* humanPlayer;
 

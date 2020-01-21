@@ -12,6 +12,7 @@ public:
 
     Ship(list<Piece *> *listOfpiece );
     ~Ship();
+
     bool isSunk();
     static bool checkIfCanBeShip(Map *map, int x, int y);
 
@@ -24,10 +25,10 @@ public:
     void setNeighborsMiss(Map *map);
 private:
     list<Piece*>* pieces;
-    static list<Piece *>* createTwoMastVertical(Map *Obiekt, int x, int y);
+    static list<Piece*>* createTwoMastVertical(Map *Obiekt, int x, int y);
     static list<Piece*>*  createThreeMastVertical(Map* Obiekt, int x, int y) ;
     static list<Piece*>*  createThreeMastHorizontal(Map *Obiekt, int x, int y);
-    static list<Piece *>* createTwoMastHorizontal(Map *Obiekt, int x, int y);
+    static list<Piece*>* createTwoMastHorizontal(Map *Obiekt, int x, int y);
 
 
 };

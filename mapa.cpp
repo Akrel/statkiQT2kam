@@ -127,34 +127,34 @@ void Piece::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void Piece::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-  if (state == SHIP)
-  {
-      if(shouldPaintShipStatus)
-      {
-          //cout << "Painting Piece..." << endl;
-          Qt::GlobalColor color = getColor(state);
-          QBrush brush(color);
+    if (state == SHIP)
+    {
+        if(shouldPaintShipStatus)
+        {
+            //cout << "Painting Piece..." << endl;
+            Qt::GlobalColor color = getColor(state);
+            QBrush brush(color);
 
-          painter->fillRect(qtRectangle, brush);
-          painter->drawRect(qtRectangle);
-      }
-      else {
-           Qt::GlobalColor color = getColor(BLANK);
-           QBrush brush(color);
+            painter->fillRect(qtRectangle, brush);
+            painter->drawRect(qtRectangle);
+        }
+        else {
+            Qt::GlobalColor color = getColor(BLANK);
+            QBrush brush(color);
 
-           painter->fillRect(qtRectangle, brush);
-           painter->drawRect(qtRectangle);
-      }
-  }
+            painter->fillRect(qtRectangle, brush);
+            painter->drawRect(qtRectangle);
+        }
+    }
     else
-  {
-      //cout << "Painting Piece..." << endl;
-      Qt::GlobalColor color = getColor(state);
-      QBrush brush(color);
+    {
+        //cout << "Painting Piece..." << endl;
+        Qt::GlobalColor color = getColor(state);
+        QBrush brush(color);
 
-      painter->fillRect(qtRectangle, brush);
-      painter->drawRect(qtRectangle);
-  }
+        painter->fillRect(qtRectangle, brush);
+        painter->drawRect(qtRectangle);
+    }
 }
 
 void Piece::setState(State state)
@@ -201,10 +201,15 @@ int Piece::getMapPositionY()
 
 Map :: ~Map()
 {
-    // TODO
+    for(std::vector<int>::size_type row = 0; row != pieces.size(); row++) {
+        for(std::vector<int>::size_type col = 0; col != pieces[row].size(); col++) {
+            delete pieces[row][col];
+        }
+    }
+
 }
 
 Piece :: ~Piece()
 {
-    // TODO
+    delete shipPointer;
 }

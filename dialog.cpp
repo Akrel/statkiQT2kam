@@ -5,6 +5,7 @@
 #include "player.h"
 #include "bot.h"
 #include <stdlib.h>
+#include <QString>
 #include <QThread>
 // Helper Functions //
 list<Ship*>*  createShips(Map* map);
@@ -32,8 +33,7 @@ Dialog::Dialog(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog)
     ui->setupUi(this);
     scene = new QGraphicsScene();
     ui->graphicsView->setScene(scene);
-
-
+    ui->label->setText(liczbaStatkow);
     playersMap = new Map(20,20,true);
     botsMap = new Map(340,20,true);
 
@@ -50,7 +50,6 @@ Dialog::Dialog(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog)
     this->bot = new Bot();
     this->playerShips = createShips(playersMap);
     this->botShips = createShips(botsMap);
-
     scene->addItem(playersMap);
     scene->addItem(botsMap);
 
@@ -70,6 +69,7 @@ void Dialog::playTheGame(GameProgressEvent* event)
 {
 
     if (currentGamePhase == GamePhase::PLAYER_TURN) {
+
 
         std::cout << "Player's move: ";
         Piece* clickedPiece = event->getClickedPiece();
@@ -100,7 +100,9 @@ void Dialog::playTheGame(GameProgressEvent* event)
             if (checkIsEnd(playerShips)) {
                 std::cout << "END, BOT WON" << flush;
                 // display prompt & exit application ?
+                playersMap->update();
             }
+             this->liczbaStatkow.append(QString::number(playerShips->size()));
             playersMap->update();
         }while(status);
         currentGamePhase = BOT_TURN;
@@ -131,7 +133,7 @@ list<Ship*>*  createShips(Map* map)
 
 
 
-    for(int i = 0; i < 1;i++){
+    for(int i = 0; i < 2;i++){
 
         listShip->push_back(Ship::createThreeMast(map));
     }
