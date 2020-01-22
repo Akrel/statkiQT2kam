@@ -90,10 +90,18 @@ Piece *Map::getPiece(int x, int y){
 
 }
 
+void Map::setEvetsActive(bool boolEventAvtive)
+{
+    this->eventsAvtive = boolEventAvtive;
+}
+
 
 void Map::mousePressEvent(QGraphicsSceneMouseEvent *event) {
-    update();
-    QGraphicsItem::mousePressEvent(event);
+    if(this->eventsAvtive == true){
+        update();
+        QGraphicsItem::mousePressEvent(event);
+    }
+
 }
 
 

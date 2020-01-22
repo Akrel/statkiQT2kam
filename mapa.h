@@ -75,7 +75,7 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
     Piece* getPiece(int x, int y);
-
+    void setEvetsActive(bool boolEventAvtive);
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 
@@ -83,7 +83,7 @@ protected:
 
 
 private:
-
+    bool eventsAvtive;
     std::vector<std::vector<Piece*>> pieces;
     int size;
     int x0;

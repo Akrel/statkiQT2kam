@@ -126,7 +126,12 @@ bool Dialog::event(QEvent *event) {
 }
 
 Dialog::~Dialog() {
-
+    delete playersMap;
+    delete botsMap;
+    delete botShips;
+    delete  playerShips;
+    delete scene;
+    
 }
 
 list<Ship*>*  createShips(Map* map)
