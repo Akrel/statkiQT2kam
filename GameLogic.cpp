@@ -102,9 +102,10 @@ void GameLogic::playTheGame(GameProgressEvent* event)
                 std::cout << "END, BOT WON" << flush;
                 // display prompt & exit application ?
                 playersMap->update();
-                QThread::msleep(150);
-            }
+                            }
             this->liczbaStatkow.append(QString::number(playerShips->size()));
+            QThread::msleep(150);
+
             playersMap->update();
         }while(status);
         currentGamePhase = BOT_TURN;
