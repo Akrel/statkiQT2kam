@@ -1,5 +1,5 @@
-#ifndef DIALOG_H
-#define DIALOG_H
+#ifndef GAMELOGIC_H
+#define GAMELOGIC_H
 
 #include <QDialog>
 
@@ -23,31 +23,31 @@ public:
 };
 
 namespace Ui {
-class Dialog;
+class GameLogic;
 }
 
-class Dialog : public QDialog
+class GameLogic : public QDialog
 {
     Q_OBJECT
 
 public:
-    
-    explicit Dialog(QWidget *parent = nullptr);
-    ~Dialog() override;
+
+    explicit GameLogic(QWidget *parent = nullptr);
+    ~GameLogic() override;
 
     bool event(QEvent *event) override;
 
     void playTheGame(GameProgressEvent* event);
 
 private:
-    Ui::Dialog *ui;
+    Ui::GameLogic *ui;
     QGraphicsScene *scene;
 
     Map* playersMap;
     Map* botsMap;
     QString liczbaStatkow;
     Bot* bot;
-    
+
 
     list<Ship*>* playerShips;
     list<Ship*>* botShips;

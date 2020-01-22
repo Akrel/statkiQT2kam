@@ -52,7 +52,7 @@ bool Bot :: takeTurn(Map* mapPlayer)
     }
     else
     {
-        int x,y;
+        int x = 0 ,y = 0;
         CoordinatsToShoot* cordToShot;
 
         do{
@@ -85,7 +85,7 @@ bool Bot :: takeTurn(Map* mapPlayer)
             if(mapPlayer->getPiece(x,y)->getShip()->isSunk() == true)
             {
                 mapPlayer->getPiece(x,y)->getShip()->setIsSunk();
-                   position->clear();
+                position->clear();
                 mapPlayer->getPiece(x,y)->getShip()->setNeighborsMiss(mapPlayer);
 
             }
@@ -145,7 +145,7 @@ bool Bot :: takeTurn(Map* mapPlayer)
                 }
 
             }
-            QThread::msleep(500);
+
             return true;
 
         }
@@ -153,13 +153,18 @@ bool Bot :: takeTurn(Map* mapPlayer)
         else
         {
 
-           cout<<"\n ustawiam miss"<< endl <<flush;
-                mapPlayer->getPiece(x,y)->setState(State::MISS);
-                return false;
+            cout<<"\n ustawiam miss"<< endl <<flush;
+            mapPlayer->getPiece(x,y)->setState(State::MISS);
+            return false;
 
         }
 
 
 
     }
+}
+
+Bot::~Bot()
+{
+    delete position;
 }

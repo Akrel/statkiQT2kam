@@ -2,7 +2,7 @@
 #include "QCoreApplication"
 #include "mapa.h"
 #include "mainwindow.h"
-extern Dialog* oknodwa;
+extern GameLogic* oknodwa;
 using namespace std;
 
 Qt::GlobalColor getColor(State state) {
@@ -209,11 +209,7 @@ int Piece::getMapPositionY()
 
 Map :: ~Map()
 {
-    for(std::vector<int>::size_type row = 0; row != pieces.size(); row++) {
-        for(std::vector<int>::size_type col = 0; col != pieces[row].size(); col++) {
-            delete pieces[row][col];
-        }
-    }
+    //delete pieces;
 
 }
 

@@ -26,7 +26,7 @@ Ship::Ship(list<Piece*>*listOfpiece)
 
 Ship::~Ship()
 {
-       delete pieces;
+    delete pieces;
 
 };
 

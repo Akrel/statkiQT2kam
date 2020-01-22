@@ -1,4 +1,4 @@
-#include "dialog.h"
+#include "GameLogic.h"
 #include "ui_dialog.h"
 #include "mapa.h"
 #include "ship.h"
@@ -26,7 +26,7 @@ Piece* GameProgressEvent::getClickedPiece() {
 }
 
 // Dialog
-Dialog::Dialog(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog)
+GameLogic::GameLogic(QWidget *parent) : QDialog(parent), ui(new Ui::GameLogic)
 {
     srand (static_cast<unsigned int>(time(nullptr)));
 
@@ -66,7 +66,7 @@ Dialog::Dialog(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog)
     delete ui;
 }
 
-void Dialog::playTheGame(GameProgressEvent* event)
+void GameLogic::playTheGame(GameProgressEvent* event)
 {
 
     if (currentGamePhase == GamePhase::PLAYER_TURN) {
@@ -102,9 +102,9 @@ void Dialog::playTheGame(GameProgressEvent* event)
                 std::cout << "END, BOT WON" << flush;
                 // display prompt & exit application ?
                 playersMap->update();
-                  QThread::msleep(150);
+                QThread::msleep(150);
             }
-             this->liczbaStatkow.append(QString::number(playerShips->size()));
+            this->liczbaStatkow.append(QString::number(playerShips->size()));
             playersMap->update();
         }while(status);
         currentGamePhase = BOT_TURN;
@@ -115,7 +115,7 @@ void Dialog::playTheGame(GameProgressEvent* event)
 
 }
 
-bool Dialog::event(QEvent *event) {
+bool GameLogic::event(QEvent *event) {
 
     if (event->type() == QEvent::Type::User) {
         playTheGame((GameProgressEvent*) event);
@@ -125,7 +125,12 @@ bool Dialog::event(QEvent *event) {
     return QDialog::event(event);
 }
 
-Dialog::~Dialog() {
+GameLogic::~GameLogic() {
+    delete playersMap;
+    delete botsMap;
+    delete botShips;
+    delete  playerShips;
+    delete scene;
 
 }
 

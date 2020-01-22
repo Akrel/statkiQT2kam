@@ -3,7 +3,7 @@
 #include <QApplication>
 #include <QMainWindow>
 #include <QDebug>
-#include "dialog.h"
+#include "GameLogic.h"
 #include "mapa.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

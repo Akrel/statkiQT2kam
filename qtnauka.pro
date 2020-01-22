@@ -17,8 +17,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     CoordinatsToShoot.cpp \
+    GameLogic.cpp \
     bot.cpp \
-    dialog.cpp \
     main.cpp \
     mainwindow.cpp \
     mapa.cpp \
@@ -26,8 +26,8 @@ SOURCES += \
 
 HEADERS += \
     CoordinatsToShoot.h \
+    GameLogic.h \
     bot.h \
-    dialog.h \
     mainwindow.h \
     mapa.h \
     ship.h

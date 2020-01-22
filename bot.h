@@ -8,7 +8,7 @@ class Bot
 public:
     Bot();
     bool takeTurn(Map* mapPlayer);
-
+    ~Bot();
 private:
     list<CoordinatsToShoot*>* position = new list<CoordinatsToShoot*>();
 

@@ -1,11 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QPainter>
-#include "dialog.h"
+#include "GameLogic.h"
 #include <QGraphicsScene>
 
 
-Dialog* oknodwa;
+GameLogic* oknodwa;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -17,13 +17,14 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete oknodwa;
 }
 
 
 void MainWindow::on_start_clicked()
 {
 
-    oknodwa = new Dialog();
+    oknodwa = new GameLogic();
     oknodwa->setModal(true);
 
     this->close();
