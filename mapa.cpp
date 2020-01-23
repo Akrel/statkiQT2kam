@@ -56,7 +56,7 @@ Map::Map(int x0, int y0,  bool shouldPaintShipStatus, int size, int pieceSize)
 
 QRectF Map::boundingRect() const
 {
-    return QRectF(x0, y0, 30*size, 30*size); // TODO- hardkodowane 30, fix
+    return QRectF(x0, y0, 30*size, 30*size);
 }
 
 

@@ -1,8 +1,10 @@
 #include "bot.h"
-#include <QThread>
+
+
+
 Bot::Bot()
 {
-    //list<CoordinatsToShoot*>* neposition = new list<CoordinatsToShoot*>();
+
     this->position =  new list<CoordinatsToShoot*>();
 
 }
@@ -12,7 +14,7 @@ bool Bot :: takeTurn(Map* mapPlayer)
 {
 
 
-    if(this->position->empty()) // jesli lista pozycja pusta losujemy z randa
+    if(this->position->empty())
     {
         int x,y;
 
@@ -42,6 +44,7 @@ bool Bot :: takeTurn(Map* mapPlayer)
                 position->push_back(oneRightPoint);
 
             }
+
             return true;
         }
         else {
@@ -147,6 +150,7 @@ bool Bot :: takeTurn(Map* mapPlayer)
             }
 
             return true;
+
 
         }
 

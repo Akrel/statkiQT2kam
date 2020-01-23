@@ -1,12 +1,6 @@
 #include "GameLogic.h"
-#include "ui_dialog.h"
-#include "mapa.h"
-#include "ship.h"
-#include "player.h"
-#include "bot.h"
-#include <stdlib.h>
-#include <QString>
-#include <QThread>
+
+extern GameLogic* oknodwa;
 // Helper Functions //
 list<Ship*>*  createShips(Map* map);
 bool checkIsEnd(list<Ship*>* ship);
@@ -33,11 +27,12 @@ GameLogic::GameLogic(QWidget *parent) : QDialog(parent), ui(new Ui::GameLogic)
     ui->setupUi(this);
     scene = new QGraphicsScene();
     ui->graphicsView->setScene(scene);
-    ui->label->setText(liczbaStatkow);
+   // ui->label->setText("Liczba statkow: "+QString::number(51));
     playersMap = new Map(20,20,true);
     botsMap = new Map(340,20,true);
+
     playersMap->setEvetsActive(false);
-    botsMap->setEvetsActive(true);
+    //botsMap->setEvetsActive(true);
     for(int x = 0; x < 10; x++)
     {
 
@@ -59,7 +54,7 @@ GameLogic::GameLogic(QWidget *parent) : QDialog(parent), ui(new Ui::GameLogic)
 
 
 
-    this->currentGamePhase = GamePhase::BOT_TURN;
+    this->currentGamePhase = GamePhase::PLAYER_TURN;
 
 
 
@@ -78,7 +73,15 @@ void GameLogic::playTheGame(GameProgressEvent* event)
         if (clickedPiece->getState() == State::SHIP) {
             clickedPiece->setState(State::HIT);
             std::cout << "hit"<<endl;
+            if(clickedPiece->getShip()->isSunk())
+            {
+
+                clickedPiece->getShip()->setIsSunk();
+                clickedPiece->getShip()->setNeighborsMiss(botsMap);
+            }
             if (checkIsEnd(botShips)) {
+
+                 //QMessageBox::information(this,"UPS","KONIEC GRY!");
                 std::cout << "END, PLAYER WON" << flush;
                 // display prompt & exit application ?
             }
@@ -97,18 +100,18 @@ void GameLogic::playTheGame(GameProgressEvent* event)
         {
 
             status = bot->takeTurn(playersMap);
-
+            QCoreApplication::sendEvent(oknodwa, new GameProgressEvent());
             if (checkIsEnd(playerShips)) {
                 std::cout << "END, BOT WON" << flush;
                 // display prompt & exit application ?
                 playersMap->update();
-                            }
-            this->liczbaStatkow.append(QString::number(playerShips->size()));
+            }
+            //  this->liczbaStatkow.append(QString::number(playerShips->size())); chciałem dodać statystyki ale chwilowo nie wiem jak
             QThread::msleep(150);
 
             playersMap->update();
         }while(status);
-        currentGamePhase = BOT_TURN;
+        currentGamePhase = PLAYER_TURN;
     }
 
 

@@ -1,8 +1,10 @@
 #ifndef BOT_H
 #define BOT_H
+
 #include "mapa.h"
 #include "ship.h"
 #include "CoordinatsToShoot.h"
+
 class Bot
 {
 public:

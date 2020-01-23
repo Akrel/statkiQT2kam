@@ -11,13 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Battleship</string>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-image: url(:reso/img/menu.png);</string>
+   <string notr="true">background-image: url(:reso/img/menu2.png);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="formLayoutWidget">

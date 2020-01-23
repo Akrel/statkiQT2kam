@@ -6,8 +6,11 @@
 #include "mapa.h"
 #include "ship.h"
 #include "bot.h"
-#include "player.h"
+#include "ui_dialog.h"
 
+#include <stdlib.h>
+#include <QMessageBox>
+#include <QThread>
 
 using namespace std;
 
@@ -45,8 +48,8 @@ private:
 
     Map* playersMap;
     Map* botsMap;
-    QString liczbaStatkow;
-    Bot* bot;
+
+ Bot* bot = new Bot();
 
 
     list<Ship*>* playerShips;
